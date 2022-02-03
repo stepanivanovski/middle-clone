@@ -3,10 +3,10 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign up</h1>
+          <h1 class="text-xs-center">Sign in</h1>
           <p class="text-xs-center">
-            <router-link :to="{name: 'login'}">
-              Need an account?
+            <router-link :to="{name: 'register'}">
+              Have an account?
             </router-link>
           </p>
           <mcv-validation-errors
@@ -14,14 +14,6 @@
             :validation-errors="validationErrors"
           ></mcv-validation-errors>
           <form @submit.prevent="onSubmit">
-            <fieldset class="form-group">
-              <input
-                class="form-control form-control-lg"
-                type="text"
-                placeholder="Username"
-                v-model="username"
-              />
-            </fieldset>
             <fieldset class="form-group">
               <input
                 class="form-control form-control-lg"
@@ -38,10 +30,11 @@
                 v-model="password"
               />
             </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right"
+            <button
+              class="btn btn-lg btn-primary pull-xs-right"
               :disabled="isSubmitting"
             >
-              Sign Up
+              Sign In
             </button>
           </form>
         </div>
@@ -52,23 +45,23 @@
 
 <script>
 import {mapState} from 'vuex'
-import McvValidationErrors from '@/components/ValidationErrors'
+
+import McvValidationErrors from '@/components/ValidationErrors.vue'
 import {actionTypes} from '@/store/modules/auth'
 
 export default {
-  name: 'McvRegister',
+  name: 'McvLogin',
   components: {
     McvValidationErrors
   },
   data() {
     return {
       email: '',
-      password: '',
-      username: ''
+      password: ''
     }
   },
   computed: {
-   ...mapState({
+    ...mapState({
       isSubmitting: state => state.auth.isSubmitting,
       validationErrors: state => state.auth.validationErrors
     })
@@ -76,9 +69,8 @@ export default {
   methods: {
     onSubmit() {
       this.$store
-        .dispatch( actionTypes.register, {
+        .dispatch(actionTypes.login, {
           email: this.email,
-          username: this.username,
           password: this.password
         })
         .then(() => {
