@@ -105,11 +105,15 @@ export default {
         apiUrl: this.apiUrl, 
         params: {limit: this.limit, offset: this.offset}
       })
-    }
+    },
+    
   },
   watch: {
     currentPage() {
       this.fetchFeed();
+    },
+    apiUrl() {
+      this.fetchFeed()
     }
   },
   mounted() {
