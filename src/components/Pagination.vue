@@ -1,6 +1,7 @@
 <template>
   <ul class="pagination">
-    <li
+    <template v-if="totalPages > 1">
+      <li
       v-for="page in totalPages"
       :key="page"
       class="page-item"
@@ -10,6 +11,7 @@
         {{ page }}
       </router-link>
     </li>
+    </template>
   </ul>
 </template>
 

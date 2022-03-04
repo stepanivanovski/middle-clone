@@ -101,7 +101,7 @@ const mutations = {
     state.currentUser = payload
   },
   [mutationTypes.updateCurrentUserFailure]() {},
-  [mutationTypes.logout]() {
+  [mutationTypes.logout](state) {
     state.currentUser = null
     state.isLoggedIn = false
   }
