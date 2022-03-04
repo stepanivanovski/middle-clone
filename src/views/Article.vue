@@ -18,7 +18,7 @@
             >
               {{ article.author.username }}
             </router-link>
-            <span class="date">{{ article.createdAt }}</span>
+            <span class="date">{{convertDate(article.createdAt)}}</span>
           </div>
           <span v-if="isAuthor">
             <router-link
@@ -56,6 +56,7 @@
 
 <script>
 import {mapState, mapGetters} from 'vuex'
+import {convertDate} from '@/helpers/utils'
 
 import {actionTypes as articleActionTypes} from '@/store/modules/article'
 import {getterTypes as authGetterTypes} from '@/store/modules/auth'
@@ -97,6 +98,9 @@ export default {
         .then(() => {
           this.$router.push({name: 'globalFeed'})
         })
+    },
+    convertDate(date) {
+      return convertDate(date)
     }
   },
   mounted() {

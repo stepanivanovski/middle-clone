@@ -7,6 +7,7 @@
       <div v-if="feed.articles.length === 0">
         Please add article
       </div>
+
       <div
         class="article-preview"
         v-for="(article, index) in feed.articles"
@@ -27,7 +28,7 @@
             >
               {{ article.author.username }}
             </router-link>
-            <span class="date">{{ article.createdAt }}</span>
+            <span class="date">{{convertDate(article.createdAt)}}</span>
           </div>
           <div class="pull-xs-right">            
             <mcv-add-to-favorites
@@ -61,6 +62,7 @@
 import {mapState} from 'vuex'
 
 import {limit} from '@/helpers/const'
+import {convertDate} from '@/helpers/utils'
 import {actionTypes} from '@/store/modules/feed'
 import McvPagination from '@/components/Pagination'
 import McvLoading from '@/components/Loading'
@@ -100,7 +102,7 @@ export default {
     },
     offset() {
       return this.currentPage * limit - limit
-    }
+    },
   },
   methods: {
     fetchFeed() {
@@ -109,7 +111,9 @@ export default {
         params: {limit: this.limit, offset: this.offset}
       })
     },
-    
+    convertDate(date) {
+      return convertDate(date)
+    }
   },
   watch: {
     currentPage() {

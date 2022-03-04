@@ -1,7 +1,7 @@
 <template>
   <ul class="pagination">
     <template v-if="totalPages > 1">
-      <li
+    <li
       v-for="page in totalPages"
       :key="page"
       class="page-item"
