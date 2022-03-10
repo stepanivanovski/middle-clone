@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="article-preview">
     Loading...
   </div>
 </template>

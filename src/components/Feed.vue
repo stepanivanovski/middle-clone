@@ -4,8 +4,11 @@
     <mcv-error-message v-if="error" />
 
     <div v-if="feed">
-      <div v-if="feed.articles.length === 0">
-        Please add article
+      <div 
+        v-if="feed.articles.length === 0"
+        class="article-preview"
+      >
+        No articles are here... yet.
       </div>
 
       <div

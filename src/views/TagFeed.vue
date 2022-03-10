@@ -23,7 +23,7 @@ import McvFeedToggler from '@/components/FeedToggler'
 
 
 export default {
-  name: 'McvYourFeed',
+  name: 'McvTagFeed',
   components: {
     McvFeed,
     McvPopularTags,

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="container">
     <mcv-loading v-if="isLoading" />
     <mcv-article-form
-      v-if="initialValues"
+      v-if="!isLoading && initialValues"
       :initialValues="initialValues"
       :errors="validationErrors"
       :isSubmitting="isSubmitting"
