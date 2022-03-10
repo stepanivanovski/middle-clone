@@ -1,4 +1,5 @@
-# mediumclone_vue
+# mediumclone_vue (RealWorld example app)
+This is an SPA written on Vue with using Vuex
 
 ## Project setup
 ```
@@ -14,11 +15,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
