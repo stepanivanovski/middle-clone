@@ -64,11 +64,5 @@ export default {
       isAnonymous: getterTypes.isAnonymous
     })
   },
-  mounted() {
-    console.log("mounted", this.currentUser)
-  },
-  updated() {
-    console.log("updated", this.currentUser)
-  },
 }
 </script>

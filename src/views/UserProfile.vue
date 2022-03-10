@@ -8,7 +8,14 @@
             <h4>{{ userProfile.username }}</h4>
             <p>{{ userProfile.bio }}</p>
             <div>
-              FOLLOW USER BUTTON
+              <button 
+                v-if="!isCurrentUserProfile"
+                :disabled="isSubmiting"
+                class="btn btn-sm action-btn"
+                @click="followUser"
+              >
+                {{followButtonContent}}
+              </button>
               <router-link
                 v-if="isCurrentUserProfile"
                 class="btn btn-sm btn-outline-secondary action-btn"
@@ -35,7 +42,7 @@
                   class="nav-link"
                   :class="{active: routeName === 'userProfile'}"
                 >
-                  My Posts
+                  My Articles
                 </router-link>
               </li>
               <li class="nav-item">
@@ -47,7 +54,7 @@
                   class="nav-link"
                   :class="{active: routeName === 'userProfileFavorites'}"
                 >
-                  Favorites Posts
+                  Favorites Articles
                 </router-link>
               </li>
             </ul>
@@ -75,7 +82,8 @@ export default {
     ...mapState({
       isLoading: state => state.userProfile.isLoading,
       userProfile: state => state.userProfile.data,
-      error: state => state.userProfile.error
+      error: state => state.userProfile.error,
+      isSubmiting: state => state.userProfile.isSubmiting
     }),
     ...mapGetters({
       currentUser: authGetterTypes.currentUser
@@ -96,6 +104,9 @@ export default {
         ? `/articles?favorited=${this.userProfileSlug}`
         : `/articles?author=${this.userProfileSlug}`
     },
+    followButtonContent() {
+      return `${ this.userProfile.following ? "Follow" : "Unfollow"} ${this.userProfile.username}`
+    },
     routeName() {
       return this.$route.name
     }
@@ -112,6 +123,12 @@ export default {
     getUserProfile() {
       this.$store.dispatch(userProfileActionTypes.getUserProfile, {
         slug: this.userProfileSlug
+      })
+    },
+    followUser() {
+      this.$store.dispatch(userProfileActionTypes.followUser, {
+        userName: this.userProfile.username,
+        following: this.userProfile.following
       })
     }
   }

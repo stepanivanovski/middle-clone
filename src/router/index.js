@@ -70,8 +70,6 @@ const routes = [
   }
 ]
 
-
-
 export default createRouter({
   routes,
   history: createWebHistory()
