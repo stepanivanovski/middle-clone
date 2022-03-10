@@ -1,5 +1,7 @@
 // import Vue from 'vue'
 import {createRouter, createWebHistory} from 'vue-router'
+import store from '@/store'
+
 import GlobalFeed from '@/views/GlobalFeed.vue'
 import YourFeed from '@/views/YourFeed.vue'
 import TagFeed from '@/views/TagFeed.vue'
@@ -41,7 +43,10 @@ const routes = [
   {
     path: '/articles/new',
     name: 'createArticle',
-    component: CreateArticle
+    component: CreateArticle,
+    meta: {
+      isAuth: true
+    }
   },
   {
     path: '/articles/:slug',
@@ -51,12 +56,18 @@ const routes = [
   {
     path: '/articles/:slug/edit',
     name: 'editArticle',
-    component: EditArticle
+    component: EditArticle,
+    meta: {
+      isAuth: true
+    }
   },
   {
     path: '/settings',
     name: 'settings',
-    component: Settings
+    component: Settings,
+    meta: {
+      isAuth: true
+    }
   },
   {
     path: '/profiles/:slug',
@@ -67,10 +78,29 @@ const routes = [
     path: '/profiles/:slug/favorites',
     name: 'userProfileFavorites',
     component: UserProfile
+  },
+  {
+    path: "/:catchAll(.*)",
+    redirect: '/',
   }
 ]
 
-export default createRouter({
+const  router = createRouter({
   routes,
   history: createWebHistory()
 })
+
+router.beforeEach((to, from, next) => {
+  console.log(store.state.auth.isLoggedIn)
+  if (to.matched.some((route) => route.meta?.isAuth)) {
+    if (store.state.auth.isLoggedIn) {
+      next();
+    } else {
+      next("/login");
+    }
+  } else {
+    next();
+  }
+});
+
+export default router
