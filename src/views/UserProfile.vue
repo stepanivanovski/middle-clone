@@ -105,7 +105,7 @@ export default {
         : `/articles?author=${this.userProfileSlug}`
     },
     followButtonContent() {
-      return `${ this.userProfile.following ? "Follow" : "Unfollow"} ${this.userProfile.username}`
+      return `${ this.userProfile.following ? "Unfollow" : "Follow"} ${this.userProfile.username}`
     },
     routeName() {
       return this.$route.name

@@ -29,6 +29,7 @@
                   v-model="body"
                 ></textarea>
               </fieldset>
+            
               <fieldset class="form-group">
                 <input
                   type="text"
@@ -89,7 +90,7 @@ export default {
         title: this.title,
         description: this.description,
         body: this.body,
-        tagList: this.tagList.split(' ')
+        tagList: this.tagList.split(' ').filter(item => item !=='')
       }
       this.$emit('articleSubmit', form)
     }

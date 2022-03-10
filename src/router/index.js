@@ -96,7 +96,7 @@ router.beforeEach((to, from, next) => {
     if (store.state.auth.isLoggedIn) {
       next();
     } else {
-      next("/login");
+      next("/");
     }
   } else {
     next();
